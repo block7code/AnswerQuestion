@@ -1,0 +1,91 @@
+<html>
+<body>
+    <h3 >1. Answer Question 1</h3>
+    <form class="" action="be-psq.html" method="post">      
+        Due Date : 
+        <span style="position: relative;display: inline-block;border: 1px solid #a9a9a9;height: 24px;width: 250px">
+            <input type="date" class="xDateGroup" onchange="setCorrect(this,'xDate');" style="position: absolute; opacity: 0.0;height: 100%;width: 100%;">
+            <input type="text" id="xDate" name="Date" value="dd, mm, yyyy" style="border: none;height: 90%;" tabindex="-1">
+            <span style="display: inline-block;width: 20px;z-index: 2; float:right; padding-top: 3px;" tabindex="-1">&#9660;</span>
+        </span>
+        <br><br>
+        Return Date : 
+        <span style="position: relative;display: inline-block;border: 1px solid #a9a9a9;height: 24px;width: 235px">
+            <input type="date" class="xDateGroup" onchange="setCorrect(this,'xDate2');" style="position: absolute; opacity: 0.0;height: 100%;width: 100%;">
+            <input type="text" id="xDate2" name="Date" value="dd, mm, yyyy" style="border: none;height: 90%;" tabindex="-1">
+            <span style="display: inline-block;width: 20px;z-index: 2; float:right; padding-top: 3px;" tabindex="-1">&#9660;</span>
+        </span>
+        <br>
+      
+        <button type="button" name="button" onclick="calLibrary()">
+            Check </button>
+    </form>
+
+    <p id="result1"></p>
+    <br><br>
+    <h3 >2. Answer Question 2</h3>
+    <p id="result2"></p>
+    <h3 >3. Answer Question 3</h3>
+    <p id="result3"></p>
+    <script language="javascript">
+
+        function calLibrary() {
+            var denda = 0;
+            var input = document.getElementsByName('Date'); 
+  
+            if(isJsonString(input[0].value) != false && isJsonString(input[1].value) != false){
+                var tgl1 = isJsonString(input[0].value);
+                var tgl2 = isJsonString(input[1].value);
+                if(tgl2[2] > tgl1[2]){
+                    var denda = (tgl2[2] - tgl1[2]) * 12000; //  Year.
+                }else if(tgl2[1] > tgl1[1]){
+                    var denda = (tgl2[1] - tgl1[1]) * 500; //  Month.
+                }else if(tgl2[0] > tgl1[0]){
+                    var denda = (tgl2[0] - tgl1[0]) * 15; // Date.
+                }
+            }
+            document.getElementById("result1").innerHTML = "Result : "+ denda;
+        }
+
+    var matchEnterdDate=0;
+    // set back date opacity for non supported browsers
+    window.onload =function(){
+        var input = document.createElement('input');
+        input.setAttribute('type','date');
+        input.setAttribute('value', 'some text'); 
+        if(input.value === "some text"){
+            allDates = document.getElementsByClassName("xDateGroup");
+            matchEnterdDate=1;
+            for (var i = 0; i < allDates.length; i++) {
+                allDates[i].style.opacity = "1";
+            } 
+        }
+    }
+    // convert enterd date to format dd, mm, yyyy
+    function setCorrect(xObj,xTraget){
+        var date = new Date(xObj.value);
+        var month = date.getMonth() +1;
+        var day = date.getDate();
+        var year = date.getFullYear();
+        if(month!='NaN'){
+            document.getElementById(xTraget).value=day+", "+month+", "+year;
+        }else{
+            if(matchEnterdDate==1){document.getElementById(xTraget).value=xObj.value;}
+        }
+    }
+    // check is interger
+    function ckInt(value) {
+        if (isNaN(value)) { return false; }
+        var x = parseFloat(value);
+        return (x | 0) === x;
+    }
+    // conver to array
+    function isJsonString(str) {
+        try {   var val = JSON.parse("[" + str + "]");  } catch (e) {  return false;  }
+        return val;
+    }
+
+
+   </script>
+  </body>
+</html>
