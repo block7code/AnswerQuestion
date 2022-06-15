@@ -19,16 +19,27 @@
       
         <button type="button" name="button" onclick="calLibrary()">
             Check </button>
+            <p id="result1"></p>
+            <br><br>
     </form>
 
-    <p id="result1"></p>
-    <br><br>
+   
     <h3 >2. Answer Question 2</h3>
-    <p id="result2"></p>
+    <form class="2" action="jawaban.html" method="post">
+        <input type="text" name="array[]" value="3" /><br>
+        <input type="text" name="array[]" value="5" /><br>
+        <input type="text" name="array[]" value="2" /><br>
+        <button type="button" name="button" onclick="getArray()">
+        Check </button> <br>
+        <p id="willBe"></p>
+        <p id="result2"></p>
+    </form>
+    <br><br>
     <h3 >3. Answer Question 3</h3>
     <p id="result3"></p>
     <script language="javascript">
 
+        //Answer no 1.  ===========
         function calLibrary() {
             var denda = 0;
             var input = document.getElementsByName('Date'); 
@@ -47,44 +58,77 @@
             document.getElementById("result1").innerHTML = "Result : "+ denda;
         }
 
-    var matchEnterdDate=0;
-    // set back date opacity for non supported browsers
-    window.onload =function(){
-        var input = document.createElement('input');
-        input.setAttribute('type','date');
-        input.setAttribute('value', 'some text'); 
-        if(input.value === "some text"){
-            allDates = document.getElementsByClassName("xDateGroup");
-            matchEnterdDate=1;
-            for (var i = 0; i < allDates.length; i++) {
-                allDates[i].style.opacity = "1";
-            } 
+        var matchEnterdDate=0;
+        // set back date opacity for non supported browsers
+        window.onload =function(){
+            var input = document.createElement('input');
+            input.setAttribute('type','date');
+            input.setAttribute('value', 'some text'); 
+            if(input.value === "some text"){
+                allDates = document.getElementsByClassName("xDateGroup");
+                matchEnterdDate=1;
+                for (var i = 0; i < allDates.length; i++) {
+                    allDates[i].style.opacity = "1";
+                } 
+            }
         }
-    }
-    // convert enterd date to format dd, mm, yyyy
-    function setCorrect(xObj,xTraget){
-        var date = new Date(xObj.value);
-        var month = date.getMonth() +1;
-        var day = date.getDate();
-        var year = date.getFullYear();
-        if(month!='NaN'){
-            document.getElementById(xTraget).value=day+", "+month+", "+year;
-        }else{
-            if(matchEnterdDate==1){document.getElementById(xTraget).value=xObj.value;}
+        // convert enterd date to format dd, mm, yyyy
+        function setCorrect(xObj,xTraget){
+            var date = new Date(xObj.value);
+            var month = date.getMonth() +1;
+            var day = date.getDate();
+            var year = date.getFullYear();
+            if(month!='NaN'){
+                document.getElementById(xTraget).value=day+", "+month+", "+year;
+            }else{
+                if(matchEnterdDate==1){document.getElementById(xTraget).value=xObj.value;}
+            }
         }
-    }
-    // check is interger
-    function ckInt(value) {
-        if (isNaN(value)) { return false; }
-        var x = parseFloat(value);
-        return (x | 0) === x;
-    }
-    // conver to array
-    function isJsonString(str) {
-        try {   var val = JSON.parse("[" + str + "]");  } catch (e) {  return false;  }
-        return val;
-    }
 
+        //Answer no 2.  ===========
+        // get data form 
+        function getArray() {
+            var input = document.getElementsByName('array[]'); 
+            var toArry = "";
+            for (var i = 0; i <  input.length; ++i) {
+                toArry += " " + input[i].value;
+                toArry+=(i==input.length -1)?"":",";
+            }
+            toArry+= "";
+            let arr =isJsonString(toArry);
+            let n = arr.length;
+            findMinCont(arr, n)
+        }
+
+        // find distribution data
+        function findMinCont(arr, n)
+        {
+            var k = "The candy distribution will be  [";
+            var candies =arr[n -2];
+            var student =arr[n -3];
+            var str = (arr[n -1] -1);
+            for (var i = 0; i < candies; ++i) {
+                result =  (i + str) % student + 1;
+                k += " " + result;
+                k+=(i==candies -1)?"":",";
+            }
+            k += "]";
+            document.getElementById("willBe").innerHTML = k;
+            document.getElementById("result2").innerHTML =  "Result : "+ result;
+        }
+
+        // global function  ========
+        // check is interger
+        function ckInt(value) {
+            if (isNaN(value)) { return false; }
+            var x = parseFloat(value);
+            return (x | 0) === x;
+        }
+        // conver to array
+        function isJsonString(str) {
+            try {   var val = JSON.parse("[" + str + "]");  } catch (e) {  return false;  }
+            return val;
+        }
 
    </script>
   </body>
