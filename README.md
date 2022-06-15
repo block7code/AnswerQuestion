@@ -4,11 +4,11 @@
 
 
 ## Demo ScreenShot by Date
-![App UI](/demo/1.png)
+![App UI](/demo/ss1.png)
 
 ## Demo ScreenShot by Month
-![App UI](/demo/2.png)
+![App UI](/demo/ss2.png)
 
 ## Demo ScreenShot by Year
-![App UI](/demo/2.png)
+![App UI](/demo/ss2.png)
 
