@@ -9,6 +9,9 @@
 ## Demo ScreenShot by Month
 ![App UI](/demo/ss2.png)
 
-## Demo ScreenShot by Year and Answer Question 2
+## Demo ScreenShot by Year 
 ![App UI](/demo/ss3.png)
+
+## Demo Answer Question Number 2 and Number 3
+![App UI](/demo/ss4.png)
 
