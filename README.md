@@ -10,5 +10,5 @@
 ![App UI](/demo/ss2.png)
 
 ## Demo ScreenShot by Year and Answer Question 2
-![App UI](/demo/ss3a.png)
+![App UI](/demo/ss3.png)
 
